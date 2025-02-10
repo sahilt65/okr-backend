@@ -11,9 +11,9 @@ export class ObjectivesService {
       include: {
         keyResults: true,
       },
-      orderBy : {
-        id: "desc"
-      }
+      orderBy: {
+        id: 'desc',
+      },
     });
   }
 
