@@ -72,13 +72,14 @@ export class GenerateKeyResultsService {
         content: `Title of Objective is : ${objectiveTitle}`,
       },
     ]);
-
+    let id: number = -1;
     try {
       const objectiveDto = { title: objectiveTitle };
       const createdObjective =
         await this.objectiveService.createObjective(objectiveDto);
 
       const objectiveID = createdObjective.id;
+      id = objectiveID;
       console.log(objectiveID);
 
       await Promise.all(
@@ -93,5 +94,7 @@ export class GenerateKeyResultsService {
     } catch (error) {
       console.error('Error creating objective and key results:', error);
     }
+
+    return {id, ...response};
   }
 }

@@ -5,7 +5,6 @@ import { DatabaseModule } from './database/database.module';
 import { PrismaService } from './prisma/prisma.service';
 import { KeyresultsModule } from './keyresults/keyresults.module';
 import { GenerateKeyResultsModule } from './generate-key-results/generate-key-results.module';
-import { GenerateKeyResultsModule } from './generate-key-results/generate-key-results.module';
 
 @Module({
   imports: [
