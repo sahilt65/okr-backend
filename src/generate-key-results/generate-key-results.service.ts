@@ -73,6 +73,7 @@ export class GenerateKeyResultsService {
       },
     ]);
     let id: number = -1;
+    let updatedKeyResults;
     try {
       const objectiveDto = { title: objectiveTitle };
       const createdObjective =
@@ -82,19 +83,35 @@ export class GenerateKeyResultsService {
       id = objectiveID;
       console.log(objectiveID);
 
-      await Promise.all(
-        response.keyResults.map((keyResult) => {
-          const createKeyResult: CreateKeyresultDto = {
-            ...keyResult,
-            objectiveID,
-          };
-          return this.keyResultService.create(createKeyResult);
-        }),
-      );
+      // await Promise.all(
+      //   response.keyResults.map((keyResult) => {
+      //     const createKeyResult: CreateKeyresultDto = {
+      //       ...keyResult,
+      //       objectiveID,
+      //     };
+      //     return this.keyResultService.create(createKeyResult);
+      //   }),
+      // );
+
+      const keyResultPromises = response.keyResults.map(async (keyResult) => {
+        const createKeyResult: CreateKeyresultDto = {
+          ...keyResult,
+          objectiveID,
+        };
+        const createdKeyResult = await this.keyResultService.create(createKeyResult);
+        return { ...keyResult, id: createdKeyResult.id }; // Add the ID to the original key result object
+      });
+
+      updatedKeyResults = await Promise.all(keyResultPromises);
+
     } catch (error) {
       console.error('Error creating objective and key results:', error);
     }
 
-    return {id, ...response};
+    // return {id, ...response};
+    console.log({ id, ...response, keyResults: updatedKeyResults });
+    return { id, ...response, keyResults: updatedKeyResults }; // Use the updated key results array
+
   }
+
 }

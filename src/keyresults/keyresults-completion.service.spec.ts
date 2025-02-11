@@ -32,6 +32,7 @@ describe('KeyresultsCompletionService', () => {
           ...dummyKeyResult,
           currentValue: 1,
           targetValue: 1,
+          objectiveID: 1
         }),
       ).toBeTruthy();
     });
@@ -42,6 +43,7 @@ describe('KeyresultsCompletionService', () => {
           ...dummyKeyResult,
           currentValue: 1,
           targetValue: 3,
+          objectiveID: 1
         }),
       ).toBeFalsy();
     });
@@ -52,6 +54,7 @@ describe('KeyresultsCompletionService', () => {
           ...dummyKeyResult,
           currentValue: 5,
           targetValue: 3,
+          objectiveID: 1
         }),
       ).toBeTruthy();
     });
@@ -62,6 +65,7 @@ describe('KeyresultsCompletionService', () => {
           ...dummyKeyResult,
           currentValue: 1,
           targetValue: 3,
+          objectiveID: 1
         }),
       ).toBeFalsy();
     });
