@@ -9,18 +9,29 @@ export class ObjectivesService {
   getObjectives() {
     return this.prisma.objective.findMany({
       include: {
-        keyResults: true,
+        keyResults: {
+          orderBy: {
+            id: 'desc',
+          },
+        },
       },
-      orderBy : {
-        id: "desc"
-      }
+      orderBy: {
+        id: 'desc',
+      },
     });
   }
 
   getObjectivesAndKeyResults() {
     return this.prisma.objective.findMany({
       include: {
-        keyResults: true,
+        keyResults: {
+          orderBy: {
+            id: 'desc',
+          },
+        },
+      },
+      orderBy: {
+        id: 'desc',
       },
     });
   }
